@@ -9,7 +9,7 @@ This is the major class in the application:
 - [Employee Management System](https://github.com/Kwameoduro/MyEMS/blob/main/ui/EmployeeManagementApp.java)
 
 ### Requirement Specification
-The requirement specification document for the project can be found [here]().
+The requirement specification document for the project can be found [here](https://github.com/Kwameoduro/MyEMS/blob/main/Requirements_Specification_My_EMS.pdf).
 
 Enjoy the ride with me.
 

@@ -1,4 +1,4 @@
-package model;
+package services;
 import database.EmployeeDatabase;
 import exceptions.EmployeeNotFoundException;
 import exceptions.InvalidDepartmentException;

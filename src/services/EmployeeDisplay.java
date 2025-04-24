@@ -1,20 +1,18 @@
-package src.services;
-import src.model.Employee;
-
+package model;
 import java.util.List;
 import java.util.Map;
 
 //Displaying employees in a well formatted structure
 public class EmployeeDisplay<T> {
-    //Display all employees in the src.database using a for-each loop
+    //Display all employees in the database using a for-each loop
 
-    public void displayAllEmployees(Map<T, Employee<T>> employees){
+    public void displayAllEmployees(Map<T, model.Employee<T>> employees){
         System.out.println("=====================================================================");
         System.out.printf("%-10s %-20s %-15s %-10s %-10s %-15s\n",
                 "ID", "Name", "Department", "Salary", "Rating", "Experience");
         System.out.println("=====================================================================");
 
-        for (Employee<T> employee : employees.values()){
+        for (model.Employee<T> employee : employees.values()){
             System.out.printf("%-10s %-20s %-15s %-10.2f %-10.2f %-15d\n",
                     employee.getEmployeeId(),
                     employee.getName(),
@@ -28,22 +26,22 @@ public class EmployeeDisplay<T> {
     }
 
     //Report of selected employees using a stream
-    public void displaySelectedEmployees(List<Employee<T>> employees){
+    public void displaySelectedEmployees(List<model.Employee<T>> employees){
         System.out.println("=====================================================================");
         System.out.printf("%-10s %-20s %-15s %-10s %-10s %-15s\n",
                 "ID", "Name", "Department", "Salary", "Rating", "Experience");
         System.out.println("=====================================================================");
 
         employees.stream().forEach(employee -> {
-                    System.out.printf("%-10s %-20s %-15s %-10.2f %-10.2f %-15d\n",
-                            employee.getEmployeeId(),
-                            employee.getName(),
-                            employee.getDepartment(),
-                            employee.getSalary(),
-                            employee.getPerformanceRating(),
-                            employee.getYearsOfExperience()
-                    );
-                });
-                System.out.println("=====================================================================");
+            System.out.printf("%-10s %-20s %-15s %-10.2f %-10.2f %-15d\n",
+                    employee.getEmployeeId(),
+                    employee.getName(),
+                    employee.getDepartment(),
+                    employee.getSalary(),
+                    employee.getPerformanceRating(),
+                    employee.getYearsOfExperience()
+            );
+        });
+        System.out.println("=====================================================================");
     }
 }

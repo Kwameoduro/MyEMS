@@ -1,4 +1,4 @@
-package model;
+package services;
 
 import java.util.Comparator;
 

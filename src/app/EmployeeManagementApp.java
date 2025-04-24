@@ -107,160 +107,160 @@ public class EmployeeManagementApp extends Application {
 
         //Event Handlers
         runButton.setOnAction(e -> {
-                String selectedAction = actionDropdown.getValue();
-                if(selectedAction == null){
-                    showAlert("Error", "Kindly select an action from the dropdown");
-                    return;
-                }
-                switch (selectedAction){
-                    case "Add Employee":
-                        try{
-                            String name = nameField.getText();
-                            String department = departmentField.getText();
-                            double performanceRating = Double.parseDouble(ratingField.getText());
-                            double salary = Double.parseDouble(salaryField.getText());
-                            int yearsOfExperience = Integer.parseInt(experienceField.getText());
-                            //System.out.println("Years of Experience: " + yearsOfExperience);
+            String selectedAction = actionDropdown.getValue();
+            if(selectedAction == null){
+                showAlert("Error", "Kindly select an action from the dropdown");
+                return;
+            }
+            switch (selectedAction){
+                case "Add Employee":
+                    try{
+                        String name = nameField.getText();
+                        String department = departmentField.getText();
+                        double performanceRating = Double.parseDouble(ratingField.getText());
+                        double salary = Double.parseDouble(salaryField.getText());
+                        int yearsOfExperience = Integer.parseInt(experienceField.getText());
+                        //System.out.println("Years of Experience: " + yearsOfExperience);
 
 
-                            if(performanceRating < 0 || performanceRating > 5){
-                                showAlert("Try Again", "Performance rating is between 0.0 and 5.0");
-                                return;
-                            }
-
-                            if(salary < 0){
-                                showAlert("Try again", "Salary must be a positive number.");
-                                return;
-                            }
-
-                            String newEmployeeId = String.format("%03d",database.getAllEmployees().size() +1);
-                            //String formattedId = String.format("%03d", newEmployeeId);
-                            Employee<String> employee = new Employee<>(newEmployeeId, name, department, salary, performanceRating, yearsOfExperience, true);
-                            //System.out.println("Employee Data: " + employee);
-                            database.addEmployee(employee);
-                            updateEmployeeTable();
-                            showAlert("Success", "Employee added successfully");
-                        } catch (NumberFormatException ex){
-                            showAlert("Error", "Please enter valid numeric details");
-                        }
-                        break;
-
-                    case "Search by Name":
-                        if (database.getAllEmployees().isEmpty()) {
-                            showAlert("Error", "The database is empty. Please add employees before searching.");
+                        if(performanceRating < 0 || performanceRating > 5){
+                            showAlert("Try Again", "Performance rating is between 0.0 and 5.0");
                             return;
                         }
-                        String name = nameField.getText().trim(); // Use nameField to input the name
-                        List<Employee<String>> employeesByName = searchManager.searchByName(name);
-                        employeeTable.getItems().clear();
-                        employeeTable.getItems().addAll(employeesByName);
-                        showAlert("Success", "Employees successfully filtered by name.");
-                        break;
 
-
-                    case "Remove Employee":
-                        if(!database.getAllEmployees().isEmpty()){
-                            database.getAllEmployees().keySet().stream().findFirst().ifPresent(database::removeEmployee);
-                            updateEmployeeTable();
-                            showAlert("Success", "Employee removed!");
-                        } else {
-                                showAlert("Error", "No employees to remove.");
-                        }
-                        break;
-
-                    case "Search by Department":
-                        if (database.getAllEmployees().isEmpty()) {
-                            showAlert("Error", "The database is empty. Please add employees before searching.");
+                        if(salary < 0){
+                            showAlert("Try again", "Salary must be a positive number.");
                             return;
                         }
-                        String department = departmentField.getText().trim();
-                        if(department.isEmpty()){
-                            showAlert("Error", "Please enter a valid department name");
-                            return;
-                        }
-                        List<Employee<String>> employeesInDepartment = searchManager.searchByDepartment(department);
-                        employeeTable.getItems().clear();
-                        employeeTable.getItems().addAll(employeesInDepartment);
-                        showAlert("Success", "Employees filtered by department");
-                        break;
 
-                    case "Sort by Performance Rating":
-                        if (database.getAllEmployees().isEmpty()) {
-                            showAlert("Error", "The database is empty. Please add employees before sorting.");
-                            return;
-                        }
-                        employeeTable.getItems().clear();
-                        database.getAllEmployees().values().stream().sorted(new EmployeeComparators.EmployeePerformanceComparator<>()).forEach(employeeTable.getItems()::add);
-                        showAlert("Success", "Employees sorted by performance rating!");
-                        break;
+                        String newEmployeeId = String.format("%03d",database.getAllEmployees().size() +1);
+                        //String formattedId = String.format("%03d", newEmployeeId);
+                        Employee<String> employee = new Employee<>(newEmployeeId, name, department, salary, performanceRating, yearsOfExperience, true);
+                        //System.out.println("Employee Data: " + employee);
+                        database.addEmployee(employee);
+                        updateEmployeeTable();
+                        showAlert("Success", "Employee added successfully");
+                    } catch (NumberFormatException ex){
+                        showAlert("Error", "Please enter valid numeric details");
+                    }
+                    break;
 
-                    case "Sort by Years of Experience":
-                        if (database.getAllEmployees().isEmpty()) {
-                            showAlert("Error", "The database is empty. Please add employees before sorting.");
-                            return;
-                        }
-                        employeeTable.getItems().clear();
-                        database.getAllEmployees().values().stream().sorted(new EmployeeComparators.EmployeeExperienceComparator<>()).forEach(employeeTable.getItems()::add);
-                        showAlert("Success", "Employees sorted by years of experience!");
-                        break;
-
-                    case "Sort by Salary":
-                        if (database.getAllEmployees().isEmpty()) {
-                            showAlert("Error", "The database is empty. Please add employees before sorting.");
-                            return;
-                        }
-                        List<Employee<String>> employeesBySalary = new ArrayList<>(database.getAllEmployees().values());
-                        employeesBySalary.sort(new EmployeeComparators.EmployeeSalaryComparator<>());
-                        employeeTable.getItems().clear();
-                        employeeTable.getItems().addAll(employeesBySalary);
-                        showAlert("Success", "Highly Paid Employees First!");
-                        break;
+                case "Search by Name":
+                    if (database.getAllEmployees().isEmpty()) {
+                        showAlert("Error", "The database is empty. Please add employees before searching.");
+                        return;
+                    }
+                    String name = nameField.getText().trim(); // Use nameField to input the name
+                    List<Employee<String>> employeesByName = (List<Employee<String>>) searchManager.searchByName(name);
+                    employeeTable.getItems().clear();
+                    employeeTable.getItems().addAll(employeesByName);
+                    showAlert("Success", "Employees successfully filtered by name.");
+                    break;
 
 
-                    case "Give Salary Raise":
-                        try {
-                            double raisePercentage = Double.parseDouble(ratingField.getText().trim()); // Input raise percentage
-                            salaryManager.giveSalaryRaise(4.5, raisePercentage); // Apply raise to high performers (threshold 4.5)
-                            updateEmployeeTable(); // Refresh TableView
-                            showAlert("Success", "Salary raise applied, Enjoy!");
-                        } catch (NumberFormatException ex) {
-                            showAlert("Error", "Please enter a valid percentage for the salary raise.");
-                        }
-                        break;
+                case "Remove Employee":
+                    if(!database.getAllEmployees().isEmpty()){
+                        database.getAllEmployees().keySet().stream().findFirst().ifPresent(database::removeEmployee);
+                        updateEmployeeTable();
+                        showAlert("Success", "Employee removed!");
+                    } else {
+                        showAlert("Error", "No employees to remove.");
+                    }
+                    break;
+
+                case "Search by Department":
+                    if (database.getAllEmployees().isEmpty()) {
+                        showAlert("Error", "The database is empty. Please add employees before searching.");
+                        return;
+                    }
+                    String department = departmentField.getText().trim();
+                    if(department.isEmpty()){
+                        showAlert("Error", "Please enter a valid department name");
+                        return;
+                    }
+                    List<Employee<String>> employeesInDepartment = searchManager.searchByDepartment(department);
+                    employeeTable.getItems().clear();
+                    employeeTable.getItems().addAll(employeesInDepartment);
+                    showAlert("Success", "Employees filtered by department");
+                    break;
+
+                case "Sort by Performance Rating":
+                    if (database.getAllEmployees().isEmpty()) {
+                        showAlert("Error", "The database is empty. Please add employees before sorting.");
+                        return;
+                    }
+                    employeeTable.getItems().clear();
+                    database.getAllEmployees().values().stream().sorted(new EmployeeComparators.EmployeePerformanceComparator<>()).forEach(employeeTable.getItems()::add);
+                    showAlert("Success", "Employees sorted by performance rating!");
+                    break;
+
+                case "Sort by Years of Experience":
+                    if (database.getAllEmployees().isEmpty()) {
+                        showAlert("Error", "The database is empty. Please add employees before sorting.");
+                        return;
+                    }
+                    employeeTable.getItems().clear();
+                    database.getAllEmployees().values().stream().sorted(new EmployeeComparators.EmployeeExperienceComparator<>()).forEach(employeeTable.getItems()::add);
+                    showAlert("Success", "Employees sorted by years of experience!");
+                    break;
+
+                case "Sort by Salary":
+                    if (database.getAllEmployees().isEmpty()) {
+                        showAlert("Error", "The database is empty. Please add employees before sorting.");
+                        return;
+                    }
+                    List<Employee<String>> employeesBySalary = new ArrayList<>(database.getAllEmployees().values());
+                    employeesBySalary.sort(new EmployeeComparators.EmployeeSalaryComparator<>());
+                    employeeTable.getItems().clear();
+                    employeeTable.getItems().addAll(employeesBySalary);
+                    showAlert("Success", "Highly Paid Employees First!");
+                    break;
 
 
-                    case "Top 5 Highest-Paid":
-                        if (database.getAllEmployees().isEmpty()) {
-                            showAlert("Error", "The database is empty. Please add employees before retrieving the top 5.");
-                            return;
-                        }
-                        List<Employee<String>> topPaidEmployees = salaryManager.getTopPaidEmployees(5);
-                        employeeTable.getItems().clear();
-                        employeeTable.getItems().addAll(topPaidEmployees);
-                        showAlert("Success", "Displayed top 5 highest-paid employees!");
-                        break;
+                case "Give Salary Raise":
+                    try {
+                        double raisePercentage = Double.parseDouble(ratingField.getText().trim()); // Input raise percentage
+                        salaryManager.giveSalaryRaise(4.5, raisePercentage); // Apply raise to high performers (threshold 4.5)
+                        updateEmployeeTable(); // Refresh TableView
+                        showAlert("Success", "Salary raise applied, Enjoy!");
+                    } catch (NumberFormatException ex) {
+                        showAlert("Error", "Please enter a valid percentage for the salary raise.");
+                    }
+                    break;
+
+
+                case "Top 5 Highest-Paid":
+                    if (database.getAllEmployees().isEmpty()) {
+                        showAlert("Error", "The database is empty. Please add employees before retrieving the top 5.");
+                        return;
+                    }
+                    List<Employee<String>> topPaidEmployees = salaryManager.getTopPaidEmployees(5);
+                    employeeTable.getItems().clear();
+                    employeeTable.getItems().addAll(topPaidEmployees);
+                    showAlert("Success", "Displayed top 5 highest-paid employees!");
+                    break;
 
 
 
-                    case "Average Salary by Department":
-                        department = departmentField.getText().trim();
-                        if (department.isEmpty()) {
-                            showAlert("Error", "Please enter a valid department name.");
-                            return;
-                        }
-                        double averageSalary = salaryManager.calculateAverageSalary(department);
-                        if (averageSalary == 0.0) {
-                            showAlert("Info", "No employees found in the specified department.");
-                        } else {
-                            showAlert("Success", "Average salary in " + department + ": GHC" + averageSalary);
-                        }
-                        break;
+                case "Average Salary by Department":
+                    department = departmentField.getText().trim();
+                    if (department.isEmpty()) {
+                        showAlert("Error", "Please enter a valid department name.");
+                        return;
+                    }
+                    double averageSalary = salaryManager.calculateAverageSalary(department);
+                    if (averageSalary == 0.0) {
+                        showAlert("Info", "No employees found in the specified department.");
+                    } else {
+                        showAlert("Success", "Average salary in " + department + ": GHC" + averageSalary);
+                    }
+                    break;
 
 
-                    default:
-                        showAlert("Error", "Invalid action selected");
-                        break;
-                }
+                default:
+                    showAlert("Error", "Invalid action selected");
+                    break;
+            }
         });
 
 

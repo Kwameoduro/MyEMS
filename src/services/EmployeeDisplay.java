@@ -1,10 +1,12 @@
-package model;
+package src.services;
+import src.model.Employee;
+
 import java.util.List;
 import java.util.Map;
 
 //Displaying employees in a well formatted structure
 public class EmployeeDisplay<T> {
-    //Display all employees in the database using a for-each loop
+    //Display all employees in the src.database using a for-each loop
 
     public void displayAllEmployees(Map<T, Employee<T>> employees){
         System.out.println("=====================================================================");

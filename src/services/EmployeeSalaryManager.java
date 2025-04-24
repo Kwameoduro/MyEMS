@@ -24,12 +24,12 @@ public class EmployeeSalaryManager<T> {
     }
 
     //Method to retrieve the top 5 highest paid employees.
-    public List<Employee<T>> getTopPaidEmployees(int topN){
-        return database.getAllEmployees().values().stream().sorted(new EmployeeComparators.EmployeeSalaryComparator<>()).limit(topN).collect(Collectors.toList());
+    public List<model.Employee<T>> getTopPaidEmployees(int topN){
+        return database.getAllEmployees().values().stream().sorted(new model.EmployeeComparators.EmployeeSalaryComparator<>()).limit(topN).collect(Collectors.toList());
     }
 
     //Method to calculate the average salary in a specific department
     public double calculateAverageSalary(String department){
-        return database.getAllEmployees().values().stream().filter(employee -> employee.getDepartment().equalsIgnoreCase(department)).mapToDouble(Employee::getSalary).average().orElse(0.0);
+        return database.getAllEmployees().values().stream().filter(employee -> employee.getDepartment().equalsIgnoreCase(department)).mapToDouble(model.Employee::getSalary).average().orElse(0.0);
     }
 }

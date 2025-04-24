@@ -1,5 +1,7 @@
 package model;
 
+import exceptions.InvalidSalaryException;
+
 public class Employee<T> implements Comparable<Employee<T>> {
     private T employeeId;
     private String name;
@@ -10,6 +12,9 @@ public class Employee<T> implements Comparable<Employee<T>> {
     private boolean isActive;
 
     public Employee(T employeeId, String name, String department, double salary, double performanceRating, int yearsOfExperience, boolean isActive) {
+        if (salary < 0) {
+            throw new InvalidSalaryException("Salary cannot be negative.");  // Added salary validation
+        }
         this.employeeId = employeeId;
         this.name = name;
         this.department = department;
@@ -19,58 +24,60 @@ public class Employee<T> implements Comparable<Employee<T>> {
         this.isActive = isActive;
     }
 
-    public T getEmployeeId(){
+    public T getEmployeeId() {
         return employeeId;
-        }
+    }
     public void setEmployeeId(T employeeId) {
         this.employeeId = employeeId;
     }
-    public String getName(){
+    public String getName() {
         return name;
     }
-    public void setName(String name){
+    public void setName(String name) {
         this.name = name;
     }
-    public String getDepartment(){
+    public String getDepartment() {
         return department;
     }
-    public void setDepartment(String department){
+    public void setDepartment(String department) {
         this.department = department;
     }
-    public double getSalary(){
+    public double getSalary() {
         return salary;
     }
-    public void setSalary(double salary){
+    public void setSalary(double salary) {
+        if (salary < 0) {
+            throw new InvalidSalaryException("Salary cannot be negative.");  // Ensuring updates also validate salary
+        }
         this.salary = salary;
     }
-    public double getPerformanceRating(){
+    public double getPerformanceRating() {
         return performanceRating;
     }
-    public void setPerformanceRating(double performanceRating){
+    public void setPerformanceRating(double performanceRating) {
         this.performanceRating = performanceRating;
     }
-    public int getYearsOfExperience(){
+    public int getYearsOfExperience() {
         return yearsOfExperience;
     }
-    public void setYearsOfExperience(int yearsOfExperience){
+    public void setYearsOfExperience(int yearsOfExperience) {
         this.yearsOfExperience = yearsOfExperience;
     }
-    public boolean isActive(){
+    public boolean isActive() {
         return isActive;
     }
-    public void setActive(boolean active){
+    public void setActive(boolean active) {
         isActive = active;
     }
 
     @Override
-    public int compareTo(Employee<T> other){
+    public int compareTo(Employee<T> other) {
         return Integer.compare(other.yearsOfExperience, this.yearsOfExperience);
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.format("ID: %s, Name: %s, Department: %s, Salary GHC: %.2f, Rating: %.2f, Experience: %d, Active: %b",
-                    employeeId, name, department, salary, performanceRating, yearsOfExperience, isActive);
-        }
+                employeeId, name, department, salary, performanceRating, yearsOfExperience, isActive);
     }
-
+}

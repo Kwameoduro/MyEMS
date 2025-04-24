@@ -1,4 +1,4 @@
-package src;
+package src.app;
 
 import database.EmployeeDatabase;
 import javafx.application.Application;

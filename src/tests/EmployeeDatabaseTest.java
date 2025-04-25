@@ -30,3 +30,4 @@ class EmployeeDatabaseTest {
         assertEquals("Employee with ID 999 not found.", exception.getMessage());
     }
 }
+

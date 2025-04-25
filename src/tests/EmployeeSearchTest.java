@@ -27,4 +27,3 @@ class EmployeeSearchTest {
         assertTrue(searchManager.searchByName("Kofi Peter").contains(emp));
     }
 }
-

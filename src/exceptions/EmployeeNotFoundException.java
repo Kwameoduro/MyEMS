@@ -1,5 +1,4 @@
 package exceptions;
-
 /**
  * Exception thrown when an employee is not found in the database.
  */

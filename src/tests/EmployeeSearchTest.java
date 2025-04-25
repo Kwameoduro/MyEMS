@@ -3,7 +3,7 @@ package tests;
 import database.EmployeeDatabase;
 import exceptions.InvalidDepartmentException;
 import model.Employee;
-import model.EmployeeSearch;
+import services.EmployeeSearch;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

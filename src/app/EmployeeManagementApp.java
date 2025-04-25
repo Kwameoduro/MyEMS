@@ -8,9 +8,9 @@ import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import model.Employee;
-import model.EmployeeComparators;
-import model.EmployeeSalaryManager;
-import model.EmployeeSearch;
+import services.EmployeeComparators;
+import services.EmployeeSalaryManager;
+import services.EmployeeSearch;
 import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
 

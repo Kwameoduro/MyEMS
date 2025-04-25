@@ -9,3 +9,4 @@ public class EmployeeNotFoundException extends RuntimeException {
         super(message);  // Exception is properly thrown without logging clutter
     }
 }
+

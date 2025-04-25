@@ -18,12 +18,12 @@ public class SalaryValidationTest {
     @Test
     void testZeroSalaryDoesNotThrowException() {
         Employee<Integer> emp = new Employee<>(2, "Ofa Yaw", "HR", 0, 3, 5, true);
-        assertEquals(0, emp.getSalary());  // ✅ Ensure salary remains valid at zero
+        assertEquals(0, emp.getSalary());  // Ensure salary remains valid at zero
     }
 
     @Test
     void testPositiveSalaryDoesNotThrowException() {
-        Employee<Integer> emp = new Employee<>(3, "Alice Smith", "Finance", 7000, 4.5, 6, true);
-        assertEquals(7000, emp.getSalary());  // ✅ Check positive salary works fine
+        Employee<Integer> emp = new Employee<>(3, "Kwaku John", "Finance", 7000, 4.5, 6, true);
+        assertEquals(7000, emp.getSalary());  // Check positive salary works fine
     }
 }

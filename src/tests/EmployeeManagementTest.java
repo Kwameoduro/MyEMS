@@ -37,6 +37,3 @@ class EmployeeManagementTest {
         assertThrows(Exception.class, () -> database.getEmployeeByID("004"));
     }
 }
-
-
-

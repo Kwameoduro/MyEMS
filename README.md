@@ -11,5 +11,4 @@ This is the major class in the application:
 ### Requirement Specification
 The requirement specification document for the project can be found [here](https://github.com/Kwameoduro/MyEMS/blob/main/Requirements_Specification_My_EMS.pdf).
 
-Enjoy the ride with me.
-
+May the force be with you!

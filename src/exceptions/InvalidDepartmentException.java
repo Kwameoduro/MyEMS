@@ -1,5 +1,4 @@
 package exceptions;
-
 /**
  * Exception thrown when an invalid department name is entered.
  */

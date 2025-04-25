@@ -28,3 +28,4 @@ public class DepartmentValidationTest {
         assertDoesNotThrow(() -> database.updateEmployeeDetails(2, "department", "Finance"));
     }
 }
+

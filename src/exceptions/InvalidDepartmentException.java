@@ -9,3 +9,4 @@ public class InvalidDepartmentException extends RuntimeException {
         super(message);  // Keeps exception functionality but removes unnecessary logs
     }
 }
+

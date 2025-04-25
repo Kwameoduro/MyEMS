@@ -4,7 +4,7 @@ import database.EmployeeDatabase;
 import exceptions.InvalidDepartmentException;
 import exceptions.EmployeeNotFoundException;
 import model.Employee;
-import model.EmployeeSearch;
+import services.EmployeeSearch;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 

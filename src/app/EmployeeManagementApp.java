@@ -402,4 +402,3 @@ public class EmployeeManagementApp extends Application {
         alert.showAndWait();
     }
 }
-
